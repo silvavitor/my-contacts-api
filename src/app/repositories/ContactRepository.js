@@ -36,13 +36,6 @@ class ContactRepository {
     return row;
   }
 
-  delete(id) {
-    return new Promise((resolve) => {
-      contacts = contacts.filter((contact) => contact.id !== id);
-      resolve();
-    });
-  }
-
   async create({
     name, email, phone, category_id,
   }) {
@@ -68,6 +61,13 @@ class ContactRepository {
       };
       contacts = contacts.map((contact) => (contact.id === id ? updatedContact : contact));
       resolve(updatedContact);
+    });
+  }
+
+  delete(id) {
+    return new Promise((resolve) => {
+      contacts = contacts.filter((contact) => contact.id !== id);
+      resolve();
     });
   }
 }
