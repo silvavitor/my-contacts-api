@@ -2,23 +2,6 @@ const { v4 } = require('uuid');
 
 const db = require('../../database');
 
-let contacts = [
-  {
-    id: v4(),
-    name: 'Vitor',
-    email: 'vitor@email.com',
-    phone: '51 9 98989898',
-    category_id: v4(),
-  },
-  {
-    id: v4(),
-    name: 'Mark',
-    email: 'mark@email.com',
-    phone: '51 9 92929292',
-    category_id: v4(),
-  },
-];
-
 class ContactRepository {
   async findAll(orderBy = 'ASC') {
     const ordenation = orderBy.toUpperCase() === 'DESC' ? 'DESC' : 'ASC';
