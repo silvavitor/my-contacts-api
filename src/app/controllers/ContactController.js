@@ -1,4 +1,5 @@
 const ContactRepository = require('../repositories/ContactRepository');
+const CategoriesRepository = require('../repositories/CategoriesRepository');
 
 class ContactController {
   // Listar todos os registros
@@ -42,6 +43,14 @@ class ContactController {
       return response.status(400).json({ error: 'e-mail already been taken!' });
     }
 
+    if (category_id){
+      const category = await CategoriesRepository.findById(category_id);
+
+      if (!category) {
+        return response.status(404).json({ error: 'Category not found!' });
+      }
+    }
+
     const newContact = await ContactRepository.create({
       name,
       email,
@@ -77,6 +86,14 @@ class ContactController {
 
     if (contactByEmail && contactByEmail.id !== id) {
       return response.status(400).json({ error: 'email already in use!' });
+    }
+
+    if (category_id){
+      const category = await CategoriesRepository.findById(category_id);
+
+      if (!category) {
+        return response.status(404).json({ error: 'Category not found!' });
+      }
     }
 
     const contact = await ContactRepository.update(id, {
