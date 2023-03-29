@@ -43,7 +43,7 @@ class ContactController {
       return response.status(400).json({ error: 'e-mail already been taken!' });
     }
 
-    if (category_id){
+    if (category_id) {
       const category = await CategoriesRepository.findById(category_id);
 
       if (!category) {
@@ -88,7 +88,7 @@ class ContactController {
       return response.status(400).json({ error: 'email already in use!' });
     }
 
-    if (category_id){
+    if (category_id) {
       const category = await CategoriesRepository.findById(category_id);
 
       if (!category) {
