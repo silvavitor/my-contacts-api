@@ -16,7 +16,7 @@ class ContactController {
     const { id } = request.params;
 
     if (!isValidUUID(id)) {
-      return response.status(400).json({ error: 'Invalid user id' });
+      return response.status(400).json({ error: 'Invalid contact id' });
     }
 
     const contact = await ContactRepository.findById(id);
@@ -34,14 +34,8 @@ class ContactController {
       name, email, phone, category_id,
     } = request.body;
 
-
-
     if (!name) {
       return response.status(400).json({ error: 'name is required!' });
-    }
-
-    if (!email) {
-      return response.status(400).json({ error: 'email is required!' });
     }
 
     if (email) {
@@ -83,7 +77,7 @@ class ContactController {
     } = request.body;
 
     if (!isValidUUID(id)) {
-      return response.status(400).json({ error: 'Invalid user id' });
+      return response.status(400).json({ error: 'Invalid contact id' });
     }
 
     if (!name) {
@@ -129,10 +123,6 @@ class ContactController {
   // Deletar um registro
   async delete(request, response) {
     const { id } = request.params;
-
-    if (!isValidUUID(category_id)) {
-      return response.status(400).json({ error: 'Invalid category' });
-    }
 
     await ContactRepository.delete(id);
 
