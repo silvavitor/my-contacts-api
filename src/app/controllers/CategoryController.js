@@ -1,8 +1,10 @@
 const CategoriesRepository = require('../repositories/CategoriesRepository');
+const ContactRepository = require('../repositories/ContactRepository');
 
 class CategoryController {
   async index(request, response) {
-    const categories = await CategoriesRepository.findAll();
+    const { orderBy } = request.query;
+    const categories = await CategoriesRepository.findAll(orderBy);
 
     return response.json(categories);
   }
@@ -62,6 +64,12 @@ class CategoryController {
 
   async delete(request, response) {
     const { id } = request.params;
+
+    const categoryInUse = await ContactRepository.findByCategoryId(id);
+
+    if (categoryInUse) {
+      return response.status(403).json({ error: 'category attached to contact!' });
+    }
 
     await CategoriesRepository.delete(id);
 
