@@ -26,6 +26,11 @@ class ContactRepository {
     return row;
   }
 
+  async findByCategoryId(category_id) {
+    const [row] = await db.query('SELECT * FROM contacts WHERE category_id=$1', [category_id]);
+    return row;
+  }
+
   async create({
     name, email, phone, category_id,
   }) {
