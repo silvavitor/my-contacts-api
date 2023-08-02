@@ -42,7 +42,6 @@ class CategoryController {
 
     const category = await CategoriesRepository.update(id, name);
     return response.json(category);
-
   }
 
   async store(request, response) {

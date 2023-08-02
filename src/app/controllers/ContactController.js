@@ -47,7 +47,6 @@ class ContactController {
     }
 
     if (category_id) {
-
       if (!isValidUUID(category_id)) {
         return response.status(400).json({ error: 'Invalid category' });
       }
